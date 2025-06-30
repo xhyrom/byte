@@ -29,7 +29,7 @@ pub fn compress_directory(
     fs::create_dir_all(dest_dir)?;
 
     let (tx, tr) = mpsc::channel();
-    let mut comp = FolderCompressor::new(source_dir.to_path_buf(), dest_dir.to_path_buf());
+    let mut comp = FolderCompressor::new(source_dir, dest_dir);
     comp.set_factor(Factor::new(options.quality, options.size_factor));
     comp.set_thread_count(thread_count);
     comp.set_sender(tx);
