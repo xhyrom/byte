@@ -13,7 +13,7 @@ pub async fn run(
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     println!("Source: {}", source.display());
     println!("Destination: {}", destination.display());
-    println!("Quality: {}", quality);
+    println!("Quality: {quality}");
 
     let options = CompressionOptions {
         quality,
@@ -39,7 +39,7 @@ pub async fn run(
         .unwrap_or(4)
         .min(8);
 
-    println!("Using {} threads for compression", thread_count);
+    println!("Using {thread_count} threads for compression");
 
     let compressed_files = compress_directory(
         &source,
@@ -82,7 +82,7 @@ pub async fn run(
     );
 
     let ratio = calculate_compression_ratio(total_original_size, total_compressed_size);
-    println!("Compression ratio: {:.1}%", ratio);
+    println!("Compression ratio: {ratio:.1}%");
     println!("Compressed files saved to: {}", destination.display());
 
     Ok(())
