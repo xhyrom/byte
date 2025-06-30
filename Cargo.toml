@@ -1,0 +1,15 @@
+[package]
+name = "byte"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+image = { version = "0.25.0" }
+tokio = { version = "1.36.0", features = ["full"] }
+walkdir = "2.5.0"
+image_compressor = "1.5.2"
+clap = { version = "4.5.4", features = ["derive"] }
+indicatif = "0.17.8"
+anyhow = "1.0.80"
+rfd = "0.14.0"
+little_exif = "0.6.8"
