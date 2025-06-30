@@ -1,5 +1,5 @@
-mod cli;
 mod compression;
+mod ui;
 
 use clap::Parser;
 use std::path::PathBuf;
@@ -13,18 +13,27 @@ struct Args {
     destination: Option<PathBuf>,
     #[arg(short, long, default_value_t = 80.)]
     quality: f32,
+
+    #[arg(long, default_value_t = false, help = "Launch Terminal UI")]
+    tui: bool,
 }
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let args = Args::parse();
 
-    cli::run(
-        args.source.unwrap(),
-        args.destination.unwrap(),
-        args.quality,
-    )
-    .await?;
+    let (source, destination, quality) =
+        if args.tui || args.source.is_none() || args.destination.is_none() {
+            let input = ui::tui::run_tui()?;
+            (input.source, input.destination, input.quality)
+        } else {
+            (
+                args.source.unwrap(),
+                args.destination.unwrap(),
+                args.quality,
+            )
+        };
 
+    ui::cli::run(source, destination, quality).await?;
     Ok(())
 }
