@@ -90,7 +90,7 @@ jobs:
 
           mv "${BIN_OUTPUT}" "tmp/${ARCHIVE_NAME}"
           cp LICENSE "tmp/${ARCHIVE_NAME}"
-          cp lsp/README.md "tmp/${ARCHIVE_NAME}"
+          cp README.md "tmp/${ARCHIVE_NAME}"
 
           if [[ "${{ matrix.archive }}" == "tar.gz" ]]; then
             ARCHIVE_PATH="tmp/${ARCHIVE_NAME}.tar.gz"
